@@ -6,7 +6,7 @@ class Socio:
         self.apellido = apellido
         self.fecha = fecha
         self.saldo = 0
-        self.registros = []
+        self.registros = {}
 
     def getIdSocio(self):
         return self.idsocio
@@ -29,23 +29,17 @@ class Socio:
     def getRegistros(self):
         return self.registros
 
-    def setIdSocio(self,idsocio):
-        self.idsocio = idsocio
-
-    def setDNI(self,dni):
-        self.dni = dni
-
-    def setNombre(self,nombre):
-        self.nombre = nombre
-
-    def setApellido(self,apellido):
-        self.apellido = apellido
-
     def setFecha(self,fecha):
         self.fecha = fecha
 
     def setSaldo(self,saldo):
-        self.saldo = saldo
+        self.saldo += saldo
 
-    def setRegistros(self,registros):
-        self.registros = registros
+    def addProducto(self,producto,kilos):
+        if producto in self.registros:
+            self.registros[producto] += kilos
+        else:
+            self.registros[producto] = kilos
+
+    def delRegistros(self):
+        self.registrosPendientes={}

@@ -126,9 +126,7 @@ while True:
     if op == 4:
         idsocio = int(input("Introduce un idsocio: "))
 
-        print("1.-Naranja")
-        print("2.-Oliva")
-        print("3.-Caqui")
+        print(con.getProductos())
         
         while True:
 
@@ -136,58 +134,40 @@ while True:
 
             if op2 == 1:
                 producto = "Naranja"
-                kilo = int(input("Introduce los kilos"))
+                kilo = int(input("Introduce los kilos: "))
 
-                socio = Socio(0,"","","","")
+                regis = con.addProducto(idsocio,producto,kilo)
 
-                socio = con.recuperarSocio(idsocio)
-
-                regis = [producto,kilo]
-
-                socio.setRegistros(regis)
-                print("Producto registrado!!")
+                if con.addProducto(idsocio,producto,kilo):
+                    print("Producto registrado!")
                 break
 
             if op2 == 2:
                 producto = "Oliva"
-                kilo = int(input("Introduce los kilos"))
+                kilo = int(input("Introduce los kilos: "))
 
-                socio = Socio(0,"","","","")
 
-                socio = con.recuperarSocio(idsocio)
+                regis = con.addProducto(idsocio,producto,kilo)
 
-                regis = [producto,kilo]
-
-                socio.setRegistros(regis)
-                print("Producto registrado!!")
+                if con.addProducto(idsocio,producto,kilo):
+                    print("Producto registrado!")
                 break
 
             if op2 == 3:
                 producto = "Caqui"
-                kilo = int(input("Introduce los kilos"))
+                kilo = int(input("Introduce los kilos: "))
 
-                socio = Socio(0,"","","","")
+                regis = con.addProducto(idsocio,producto,kilo)
 
-                socio = con.recuperarSocio(idsocio)
-
-                regis = [producto,kilo]
-
-                socio.setRegistros(regis)
-                print("Producto registrado!!")
+                if con.addProducto(idsocio,producto,kilo):
+                    print("Producto registrado!")
                 break
 
     if op == 5:
         idsocio = int(input("Introduce un Id socio: "))
 
-        saldo = con.actualizarSaldo(idsocio)
-
-        socio = Socio(0,"","","","")
-
-        socio = con.recuperarSocio(idsocio)
-
-        socio.setSaldo(saldo)
-
-        print("Saldo actualizado!!")
+        if con.actualizarSaldo(idsocio):
+            print("Saldo actualizado correctamente!")
 
 
     if op == 6:

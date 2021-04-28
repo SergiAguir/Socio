@@ -3,9 +3,17 @@ from socio import Socio
 class Controlador:
     def __init__(self):
         self.listaSocios = {}
+        self.productos = {"Naranja":10,"Oliva":20,"Caqui":5}
 
     def getNumSocios(self):
         return len(self.listaSocios)
+
+    def getProductos(self):
+        lista=""
+        for i in self.productos:
+            lista += i+"\n"
+        return lista
+
 
     def existeSocio(self,idsocio):
         if idsocio in self.listaSocios.keys():
@@ -60,13 +68,24 @@ class Controlador:
             socio = self.listaSocios[idsocio]
         return socio
 
+    def addProducto(self,idsocio,producto,kilos):
+        if idsocio in self.listaSocios:
+            if producto in self.productos:
+                self.listaSocios[idsocio].addProducto(producto,kilos)
+                return True
+        return False
+
+
+
+
     def actualizarSaldo(self,idsocio):
-        if idsocio in self.listaSocios.keys():
-            reg = self.listaSocios[idsocio].getRegistros()
-            if reg[0] == "Naranja":
-                saldo = 10 * int(reg[1])
-            if reg[0] == "Oliva":
-                saldo = 20 * int(reg[1])
-            if reg[0] == "Caqui":
-                saldo = 5 * int(reg[1])
-            return saldo
+        saldo=0
+        if idsocio in self.listaSocios:
+            for clave,valor in self.listaSocios[idsocio].getRegistros().items():
+                saldo+= self.productos[clave] * int(valor)
+
+            self.listaSocios[idsocio].setSaldo(saldo)
+            self.listaSocios[idsocio].delRegistros()
+            return True
+        return False
+
